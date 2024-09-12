@@ -1,11 +1,103 @@
-.navbar{
-    background-color: white;
-    position: absolute;
-    top: 10px;
-    margin:20px 20px 20px 20px;
-    width: calc(100% - 40px);
-}
-.navbar-menu{
+/* Container for the entire navbar */
+.navbar {
     display: flex;
-    gap:20px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px 20px;
+    color: black; /* Ensure text color is visible on white background */
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: calc(100% - 100px); 
+    margin: 35px; 
+    position: relative; 
+    z-index: 1000; 
+}
+
+/* Logo styling */
+.nav-logo .logo {
+    height: 50px;
+    cursor: pointer;
+}
+
+/* Navigation menu styling */
+.nav-menu {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-menu li {
+    font-size: 1.1rem;
+    cursor: pointer;
+    position: relative;
+    padding: 10px;
+    transition: color 0.3s ease;
+    color: black;
+}
+
+.nav-menu li:hover {
+    color: #f5a623;
+}
+
+/* Active link styling */
+.nav-menu li.active {
+    color: #f5a623;
+    font-weight: bold;
+}
+
+.nav-menu li.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: #f5a623;
+    margin: auto;
+    width: 100%;
+}
+
+/* Cart and login section */
+.nav-cart-login {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Button styling for login/logout */
+.nav-button {
+    background-color: #f5a623;
+    color: black;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: #e6951d;
+}
+
+/* Cart icon styling */
+.cart-icon-container {
+    position: relative;
+}
+
+.cart-icon {
+    height: 30px;
+    cursor: pointer;
+}
+
+/* Cart count styling */
+.nav-cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: #f5a623;
+    color: white;
+    font-size: 0.8rem;
+    padding: 2px 6px;
+    border-radius: 50%;
 }
