@@ -13,10 +13,10 @@ const LatestArticle = () => {
           'https://newsapi.org/v2/everything',
           {
             params: {
-              q: 'dresses', // Search term for dress-related news
-              apiKey: '3d10bf3f1a8448a497613af5b89d9add', // Replace with your NewsAPI key
-              sortBy: 'publishedAt', // Sort by latest articles
-              pageSize: 5 // Number of articles to fetch
+              q: 'dresses',
+              apiKey: '3d10bf3f1a8448a497613af5b89d9add',
+              sortBy: 'publishedAt',
+              pageSize: 5
             }
           }
         );

@@ -1,6 +1,4 @@
 /* NewsLetter.css */
-
-/* Import fonts from Google Fonts or include them in your project */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
 
 .newsletter {
@@ -15,18 +13,18 @@
 }
 
 .newsletter h1 {
-    font-size: 2.5rem; /* Large font size for the heading */
+    font-size: 2.5rem;
     font-weight: 700;
-    color: #2c3e50; /* Dark color to match the rest of the theme */
+    color: #2c3e50;
     margin-bottom: 10px;
-    font-family: 'Playfair Display', serif; /* Elegant serif font */
+    font-family: 'Playfair Display', serif;
 }
 
 .newsletter p {
-    font-size: 1.2rem; /* Slightly smaller font size for the description */
-    color: #34495e; /* Darker text color */
+    font-size: 1.2rem;
+    color: #34495e;
     margin-bottom: 20px;
-    font-family: 'Roboto', sans-serif; /* Clean sans-serif font */
+    font-family: 'Roboto', sans-serif;
 }
 
 .newsletter input {
@@ -35,7 +33,7 @@
     border: 1px solid #ddd;
     border-radius: 30px;
     width: 100%;
-    max-width: 400px; /* Max width for better responsiveness */
+    max-width: 400px;
     margin-right: 10px;
     box-sizing: border-box;
 }
@@ -44,7 +42,7 @@
     padding: 10px 20px;
     font-size: 1rem;
     color: #ffffff;
-    background-color: #e94e77; /* Bright button color to match the theme */
+    background-color: #e94e77;
     border: none;
     border-radius: 30px;
     cursor: pointer;
@@ -53,5 +51,5 @@
 }
 
 .newsletter button:hover {
-    background-color: #d43f66; /* Darker shade for hover effect */
+    background-color: #d43f66;
 }

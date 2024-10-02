@@ -1,11 +1,11 @@
-/* Container for the entire navbar */
+
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: white;
     padding: 10px 20px;
-    color: black; /* Ensure text color is visible on white background */
+    color: black; 
     font-family: 'Poppins', sans-serif;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     width: calc(100% - 100px); 
@@ -14,13 +14,11 @@
     z-index: 1000; 
 }
 
-/* Logo styling */
 .nav-logo .logo {
     height: 50px;
     cursor: pointer;
 }
 
-/* Navigation menu styling */
 .nav-menu {
     display: flex;
     gap: 30px;
@@ -40,7 +38,6 @@
     color: #f5a623;
 }
 
-/* Active link styling */
 .nav-menu li.active {
     color: #f5a623;
     font-weight: bold;
@@ -58,46 +55,57 @@
     width: 100%;
 }
 
-/* Cart and login section */
+
 .nav-cart-login {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-/* Button styling for login/logout */
-.nav-button {
+.login-signup-btn{
     background-color: #f5a623;
-    color: black;
+    color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
+    padding: 6px 12px; 
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 0.9rem; 
 }
 
 .nav-button:hover {
     background-color: #e6951d;
 }
+@media (max-width: 675px) {
+    .nav-logo{
+        display: none;
+    }
 
-/* Cart icon styling */
-.cart-icon-container {
-    position: relative;
+
 }
 
-.cart-icon {
-    height: 30px;
-    cursor: pointer;
-}
+@media (max-width: 533px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        margin: 10px;
+        width: 100%;
+        gap:20px;
+    }
 
-/* Cart count styling */
-.nav-cart-count {
-    position: absolute;
-    top: -5px;
-    right: -10px;
-    background-color: #f5a623;
-    color: white;
-    font-size: 0.8rem;
-    padding: 2px 6px;
-    border-radius: 50%;
+    .nav-menu li {
+        font-size: 1rem;
+        padding: 5px;
+    }
+
+    .nav-cart-login {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .login-signup-btn {
+        width: 200px;
+        text-align: center;
+    }
 }
