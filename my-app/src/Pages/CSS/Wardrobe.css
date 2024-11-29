@@ -142,3 +142,9 @@ button {
 button:hover {
   background-color: #ed9c1a;
 }
+@media (max-width:553px){
+  body{
+    padding: 0px !important;
+
+  }
+}

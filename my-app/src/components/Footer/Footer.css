@@ -6,6 +6,7 @@
     font-family: 'Poppins', sans-serif;
     position: relative;
     top: 50px; /*changed*/
+    width: 100%;
   }
   
   .footer-top {

@@ -8,6 +8,7 @@
     background-repeat: no-repeat;
     position: relative;
     background-color: #ffe4e1; /* Soft light pink background */
+    width: 100%;
 }
 
 
@@ -61,4 +62,9 @@
     margin-left: 10px;
     width: 20px;
     height: 20px;
+}
+@media(max-width:533px){
+    .hero-content{
+        
+    }
 }

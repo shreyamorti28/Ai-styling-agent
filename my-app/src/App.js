@@ -38,7 +38,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <div>
+      <div className='navbar-item'>
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
