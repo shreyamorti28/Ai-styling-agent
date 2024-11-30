@@ -11,6 +11,7 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 100%;
+    padding-bottom: 20px;
 }
 
 .newsletter h1 {
@@ -53,4 +54,16 @@
 
 .newsletter button:hover {
     background-color: #d43f66;
+}
+@media(max-width:865px){
+    .newsletter h1 {
+        font-size: 2rem;
+
+}
+}
+@media(max-width:513px){
+    .newsletter h1 {
+        font-size: 1.5rem;
+
+}
 }
