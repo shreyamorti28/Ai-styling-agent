@@ -92,7 +92,7 @@ const Outfits = ({ images, onGenerateAIResult }) => {
               </div>
             ))}
           </div>
-          <button onClick={() => setIsDialogOpen(false)}>Close</button>
+          <button className="out-butt" onClick={() => setIsDialogOpen(false)}>Close</button>
         </div>
       )}
 

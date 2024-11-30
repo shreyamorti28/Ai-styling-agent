@@ -1,5 +1,5 @@
 .login-container {
-    max-width: 500px;
+    width: 500px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ddd;
@@ -10,7 +10,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: transform 0.3s;
 }
+.login-container:hover {
+    transform: scale(1.02);
+  }
 
 h1 {
     color: #f5a623;
@@ -45,13 +49,15 @@ input[type="email"], input[type="password"] {
     width: 100%;
     max-width: 400px;
     box-sizing: border-box;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease box-shadow 0.3s;
 }
 
 input[type="email"]:focus, input[type="password"]:focus {
     border-color: #f5a623;
     outline: none;
+    box-shadow: 0 0 5px rgba(238, 183, 4, 0.986);
 }
+
 
 form button {
     background-color: #f5a623;
@@ -61,13 +67,14 @@ form button {
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s, transform 0.2s;
     width: 100%;
     max-width: 200px;
 }
 
 button:hover {
     background-color: #e69518;
+    transform: translateY(-2px);
 }
 
 button:active {
@@ -128,4 +135,15 @@ input[type="file"] {
     width: 100%;
     max-width: 400px;
     box-sizing: border-box;
+}
+@media(max-width:627px){
+    .login-container{
+        width:350px;
+    }
+}
+@media(max-width:516px){
+    .login-container{
+        margin-top:20px;
+        width:300px;
+    }
 }
