@@ -84,9 +84,15 @@ const LoginSignup = ({ onLogout }) => {
             }
             await createUserWithEmailAndPassword(auth, email, password);
             setLoginMessage('Sign up successful! Please log in.');
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            console.log('User logged in:', userCredential.user.uid);
+            setIsAuthenticated(true);
+            navigate('/wardrobe');
             setEmail('');
             setPassword('');
             setPasswordStrength('');
+
+
         } catch (error) {
             console.error('Error during signup:', error.message);
             setErrorMessage('Signup failed. Please check your details.');
