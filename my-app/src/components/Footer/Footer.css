@@ -18,6 +18,7 @@
   
  
   .footer-section {
+
     padding: 0 15px;
   }
   
@@ -28,6 +29,8 @@
   }
   
   .footer-section p {
+    
+    text-align:start;
     font-size: 0.95rem;
     line-height: 1.8;
     color: #d3d3d3;
@@ -92,7 +95,7 @@
     }
   
     .footer-section {
-      padding: 0;
+      padding: 10px;
     }
   }
   

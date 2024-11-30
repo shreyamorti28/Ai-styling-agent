@@ -75,7 +75,7 @@
 .nav-button:hover {
     background-color: #e6951d;
 }
-@media (max-width: 675px) {
+@media (max-width: 729px) {
     .nav-logo{
         display: none;
     }
@@ -94,10 +94,16 @@
 
         
         margin: 0px;
+        overflow-x: auto;
+        
         
         
 
         
+    }
+    .image-gallery{
+        display: flex;
+        flex-direction: column;
     }
     
 
@@ -113,7 +119,8 @@
     }
     
     .login-signup-btn {
-        width: 200px;
+        margin-top: 10px;
+        width: 100px;
         text-align: center;
     }
 }

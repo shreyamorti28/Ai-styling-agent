@@ -57,8 +57,8 @@ const Outfits = ({ images, onGenerateAIResult }) => {
       <h2>Outfit Selection</h2>
 
       {/* Button to open dialog for selecting Top and Bottom images */}
-      <button onClick={() => openDialog('top')}>Select Top Images</button>
-      <button onClick={() => openDialog('bottom')}>Select Bottom Images</button>
+      <button className="out-butt" onClick={() => openDialog('top')}>Select Top Images</button>
+      <button className="out-butt" onClick={() => openDialog('bottom')}>Select Bottom Images</button>
 
       {/* Display selected Top and Bottom images */}
       <div>
@@ -97,7 +97,7 @@ const Outfits = ({ images, onGenerateAIResult }) => {
       )}
 
       {/* Generate button */}
-      <button onClick={handleGenerate} disabled={selectedTopImages.length == 0 || selectedBottomImages.length == 0}>
+      <button className="gen-click" onClick={handleGenerate} disabled={selectedTopImages.length == 0 || selectedBottomImages.length == 0}>
         Generate Outfit
       </button>
 

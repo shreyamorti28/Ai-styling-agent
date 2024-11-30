@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, fetchSignInMethodsForEmail } from 'firebase/auth';
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut,
+    fetchSignInMethodsForEmail,
+    sendPasswordResetEmail,
+} from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { v4 as uuidv4 } from 'uuid'; 
-import { auth, storage } from '../firebase'; 
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import { v4 as uuidv4 } from 'uuid';
+import { auth, storage } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 import './CSS/LoginSignup.css';
 
 const LoginSignup = ({ onLogout }) => {
@@ -16,18 +24,30 @@ const LoginSignup = ({ onLogout }) => {
     const [passwordStrength, setPasswordStrength] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [loginMessage, setLoginMessage] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
+    const [termsAccepted, setTermsAccepted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const navigate = useNavigate();  // Initialize navigate
+    const navigate = useNavigate();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setIsAuthenticated(true);
-            } else {
-                setIsAuthenticated(false);
-            }
+            setIsAuthenticated(!!user);
         });
         return () => unsubscribe();
+    }, []);
+    useEffect(() => {
+        
+        const logoutUser = async () => {
+            try {
+                await signOut(auth);
+                console.log('User logged out successfully.');
+            } catch (error) {
+                console.error('Error logging out:', error.message);
+            }
+        };
+    
+        logoutUser();
     }, []);
 
     const handleEmailChange = (e) => setEmail(e.target.value);
@@ -51,6 +71,11 @@ const LoginSignup = ({ onLogout }) => {
         e.preventDefault();
         setErrorMessage('');
         setLoginMessage('');
+        if (!termsAccepted) {
+            setErrorMessage('You must accept the terms and conditions.');
+            return;
+        }
+        setIsLoading(true);
         try {
             const methods = await fetchSignInMethodsForEmail(auth, email);
             if (methods.length > 0) {
@@ -64,11 +89,9 @@ const LoginSignup = ({ onLogout }) => {
             setPasswordStrength('');
         } catch (error) {
             console.error('Error during signup:', error.message);
-            if (error.message.includes('auth/weak-password')) {
-                setErrorMessage('Password should be at least 6 characters.');
-            } else {
-                setErrorMessage('Signup failed. check if Account already exists with this email.');
-            }
+            setErrorMessage('Signup failed. Please check your details.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -76,81 +99,62 @@ const LoginSignup = ({ onLogout }) => {
         e.preventDefault();
         setErrorMessage('');
         setLoginMessage('');
+        setIsLoading(true);
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-            console.log('User logged in:', user.uid);
+            console.log('User logged in:', userCredential.user.uid);
             setIsAuthenticated(true);
-            setEmail('');
-            setPassword('');
-            setPasswordStrength('');
-            navigate('/wardrobe'); // Redirect to Wardrobe page after successful login
+            navigate('/wardrobe');
         } catch (error) {
             console.error('Error during login:', error.message);
             setErrorMessage('Incorrect email or password.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setSelectedImage(file);
-        }
-    };
-
-    const handleUpload = async () => {
-        if (!selectedImage) {
-            alert('Please select an image to upload.');
+    const handleForgotPassword = async () => {
+        if (!email) {
+            setErrorMessage('Please enter your email to reset the password.');
             return;
         }
+        setIsLoading(true);
         try {
-            const user = auth.currentUser;
-            if (user) {
-                const userId = user.uid;
-                const imageRef = ref(storage, `images/${userId}/${uuidv4()}`);
-                const snapshot = await uploadBytes(imageRef, selectedImage);
-                const downloadUrl = await getDownloadURL(snapshot.ref);
-                setUploadedImageUrl(downloadUrl);
-                alert('Image uploaded successfully!');
-            } else {
-                alert('No user is signed in.');
-            }
+            await sendPasswordResetEmail(auth, email);
+            setLoginMessage('Password reset email sent. Check your inbox.');
         } catch (error) {
-            console.error('Error uploading image:', error.message);
-        }
-    };
-
-    const handleLogout = async () => {
-        try {
-            await signOut(auth);
-            setIsAuthenticated(false);
-            setLoginMessage('');
-            onLogout();
-        } catch (error) {
-            console.error('Error during logout:', error.message);
+            console.error('Error sending reset email:', error.message);
+            setErrorMessage('Failed to send reset email. Check your email address.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
     const toggleToSignup = () => {
         setIsLogin(false);
-        setEmail('');
-        setPassword('');
-        setPasswordStrength('');
-        setErrorMessage('');
-        setLoginMessage('');
+        resetForm();
     };
 
     const toggleToLogin = () => {
         setIsLogin(true);
+        resetForm();
+    };
+
+    const resetForm = () => {
         setEmail('');
         setPassword('');
         setPasswordStrength('');
         setErrorMessage('');
         setLoginMessage('');
+        setTermsAccepted(false);
     };
+
+    const handleRememberMe = (e) => setRememberMe(e.target.checked);
+    const handleTermsChange = (e) => setTermsAccepted(e.target.checked);
 
     return (
         <div className='login-container'>
+            {isLoading && <div className="loading-spinner">Loading...</div>}
             {isLogin ? (
                 <div>
                     <h1>Login</h1>
@@ -161,6 +165,10 @@ const LoginSignup = ({ onLogout }) => {
                         <label>Password:
                             <input type="password" value={password} onChange={handlePasswordChange} required />
                         </label>
+                        <label>
+                            <input type="checkbox" checked={rememberMe} onChange={handleRememberMe} />
+                            Remember Me
+                        </label>
                         {errorMessage && <p className="error-message">{errorMessage}</p>}
                         <button type="submit">Login</button>
                     </form>
@@ -170,7 +178,6 @@ const LoginSignup = ({ onLogout }) => {
                             Sign up
                         </span>
                     </p>
-                    {loginMessage && <p className="success-message">{loginMessage}</p>}
                 </div>
             ) : (
                 <div>
@@ -181,6 +188,10 @@ const LoginSignup = ({ onLogout }) => {
                         </label>
                         <label>Password:
                             <input type="password" value={password} onChange={handlePasswordChange} required />
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={termsAccepted} onChange={handleTermsChange} required />
+                            I accept the Terms and Conditions
                         </label>
                         {passwordStrength && <p className="password-strength">Password Strength: {passwordStrength}</p>}
                         {errorMessage && <p className="error-message">{errorMessage}</p>}

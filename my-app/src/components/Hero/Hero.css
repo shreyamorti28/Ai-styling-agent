@@ -63,8 +63,13 @@
     width: 20px;
     height: 20px;
 }
-@media(max-width:533px){
-    .hero-content{
-        
+@media(max-width:1054px){
+    .hero-content h2{
+        font-size:30px;
+    }
+}
+@media(max-width:413px){
+    .hero-content h2{
+        font-size:20px;
     }
 }

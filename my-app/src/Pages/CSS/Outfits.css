@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 800px;
+  width: 700px;
   margin: 0 auto;
   padding: 20px;
   font-family: 'Arial', sans-serif;
@@ -154,7 +154,34 @@ p {
   text-align: center;
   margin-top: 20px;
 }
+.out-butt{
+  width: 150px;
+  background-color: #f2a62c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin-top: 15px;
 
+}
+
+.gen-click{
+  width: 150px;
+  background-color: #f2a62c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  
+
+
+}
 .empty-placeholder {
   font-size: 1.5em;
   color: #777;
@@ -177,4 +204,20 @@ p {
   max-width: 80%;
   max-height: 80%;
   object-fit: contain;
+}
+
+@media(max-width:854px){
+  .outfit-page{
+    width:500px;
+  }
+}
+@media(max-width:674px){
+  .outfit-page{
+    width:300px;  
+  }
+}
+@media(max-width:372px){
+  .outfit-page{
+    width:250px;  
+  }
 }

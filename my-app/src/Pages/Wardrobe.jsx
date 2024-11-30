@@ -100,7 +100,7 @@ const Wardrobe = ({ isAuthenticated, setImages,images }) => {
             Select Image
             <input type="file" accept="image/*" onChange={handleImageChange} />
           </label>
-          <button onClick={handleUpload}>Upload Image</button>
+          <button className="ward-button" onClick={handleUpload}>Upload Image</button>
           {selectedImage && (
             <div>
               <h3>Selected Image Preview:</h3>

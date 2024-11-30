@@ -126,7 +126,7 @@ input[type="file"] {
   display: none;
 }
 
-button {
+.ward-button{
   width: 150px;
   background-color: #f2a62c;
   color: white;
@@ -136,12 +136,13 @@ button {
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s;
-  margin-top: 15px;
+
 }
 
 button:hover {
   background-color: #ed9c1a;
 }
+
 @media (max-width:553px){
   body{
     padding: 0px !important;
