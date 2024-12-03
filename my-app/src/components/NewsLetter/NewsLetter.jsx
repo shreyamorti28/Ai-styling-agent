@@ -5,34 +5,19 @@ const NewsLetter = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  const handleSubscribe = async () => {
+  const handleSubscribe = () => {
     if (!email) {
       setMessage('Please enter a valid email address.');
       return;
     }
 
-    try {
-      const response = await fetch('http://localhost:5000/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setMessage(data.message); // "Subscription successful!"
-        setEmail(''); // Clear the email input
-      } else {
-        setMessage(data.message); // Show error message
-      }
-    } catch (error) {
-      setMessage('An error occurred. Please try again.');
-    }
+    // Simulate subscription success
+    setMessage(`Thank you for subscribing with ${email}!`);
+    setEmail(''); // Clear the email input
   };
 
   return (
-    <div className='newsletter'>
+    <div className="newsletter">
       <h1>Stay Updated with the Latest Fashion Trends</h1>
       <p>Subscribe to our newsletter and stay updated</p>
       <div>
